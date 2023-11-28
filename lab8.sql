@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
+    file_id INT,
+    FOREIGN KEY (file_id) REFERENCES files(id),
 );
 
 DROP TABLE IF EXISTS users_projects;
