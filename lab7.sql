@@ -4,7 +4,6 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    ip VARCHAR(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS news_categories;
@@ -24,7 +23,7 @@ CREATE TABLE news (
 
 DROP TABLE IF EXISTS comments;
 CREATE TABLE comments (
-    comment_id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     news_id INT,
     commenter_id INT,
     comment_text TEXT,
@@ -34,11 +33,12 @@ CREATE TABLE comments (
 
 DROP TABLE IF EXISTS ratings;
 CREATE TABLE ratings (
-    rating_id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     news_id INT,
-    user_id INT NOT NULL,
+    user_id INT NULL,
+    user_ip VARCHAR(255) NOT NULL,
     rating_value INT CHECK (rating_value BETWEEN 1 AND 5),
-    UNIQUE KEY (news_id, user_id),
+    UNIQUE KEY (news_id, user_ip),
     FOREIGN KEY (news_id) REFERENCES news(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
